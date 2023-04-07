@@ -9,57 +9,18 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 // 基本信息
 const config = {
   title: '我的博客',  // 网页标题
-  titleDelimiter: "-",
+  // titleDelimiter: "-",
   url: 'https://my-blog-teal-seven.vercel.app/', // 博客地址
   baseUrl: '/',
   favicon: 'img/favicon.ico', //网站图标
-  organizationName: 'kexx', // 名字
+  organizationName: 'kexy', // 名字
   projectName: 'https://my-blog-teal-seven.vercel.app/', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
-  i18n: {
-    defaultLocale: "zh-Hans",
-    locales: ["zh-Hans"],
-    localeConfigs: {
-      "zh-Hans": {
-        label: "中文",
-      },
-      en: {
-        label: "English",
-      },
-    }
-  },
-
-  presets: [
-    [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
-        docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: "https://github.com/jack-ke/my-blog",
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
-      }),
-    ],
-  ],
-
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    /** @type {import('@docusaurus/preset-classic').Options} */
     ({
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
@@ -71,19 +32,41 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Tutorial',
+            type: "localeDropdown",
+            position: "left",
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
+          { to: '/blog', label: 'Blog', position: 'right' },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            to: "docs/all-intro",
+            label: "专属学习笔记",
+            position: "right",
+          },
+          {
+            label: "小工具",
+            position: "right",
+            items: [{
+              label: "简易的rap参数转ts格式工具",
+              to: "https://jack-zhang-coming.github.io/rap-to-ts/",
+            },
+            {
+              label: "小张同学的照片墙",
+              to: "https://photo.zhangqiang.hk.cn/",
+            },
+            {
+              label: "基于ChatGPT的问答系统",
+              to: "http://chatgptrobot.zhangqiang.hk.cn/",
+            },
+            ],
+          },
+          {
+            href: 'https://github.com/jack-ke/my-blog',
             label: 'GitHub',
             position: 'right',
           },
         ],
       },
+
+      // 页脚内容
       footer: {
         style: 'dark',
         links: [
@@ -129,12 +112,52 @@ const config = {
         ],
         copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
+
+      // 主题
       prism: {
-        theme: require("prism-react-renderer/themes/github"),
-        darkTheme: require("prism-react-renderer/themes/oceanicNext"),
+        theme: lightCodeTheme,
+        darkTheme: darkCodeTheme,
         defaultLanguage: "javascript",
       },
     }),
+  presets: [
+    [
+      'classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        docs: {
+          // sidebarPath: require.resolve('./sidebars.js'),
+          // editUrl: "https://github.com/jack-ke/my-blog",
+          sidebarPath: require.resolve("./sidebars.js"),
+          editUrl: "https://github.com/jack-ke/my-blog",
+          // remarkPlugins: [math],
+          // rehypePlugins: [katex],
+          showLastUpdateTime: true,
+        },
+        blog: {
+          showReadingTime: true,
+          editUrl: 'https://github.com/jack-ke/my-blog',
+        },
+        theme: {
+          customCss: require.resolve('./src/css/custom.css'),
+        },
+      }),
+    ],
+  ],
+  i18n: {
+    defaultLocale: "zh-Hans",
+    locales: ["zh-Hans"],
+    localeConfigs: {
+      "en": {
+        label: "English",
+      },
+      "zh-Hans": {
+        label: "中文",
+      },
+
+    }
+  },
+
 };
 
 module.exports = config;
